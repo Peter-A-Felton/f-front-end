@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Library | Update Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="books.html">All Books</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="show-book.html">Examine Book</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="insert-book.html">Insert Book</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="update-book.html">Update Book</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="delete-book.html">Delete Book</a>
+        </li>
+    </ul>
+</nav>
+<div class="container">
+    <h1>Update Book</h1>
+    <div class="container">
+        <form method="POST"
+              action="https://spu-f-back-end.herokuapp.com/api/books/">
+            <h2>Please provide your book information</h2>
+            <div class="mb-3 form-group">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" class="form-control"
+                       placeholder="Title">
+            </div>
+            <div class="mb-3 form-group">
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description" class="form-control"
+                       placeholder="Description">
+            </div>
+            <div class="mb-3 form-group">
+                <label for="year">Year:</label>
+                <input type="number" step="1" name="year" id="year" min="0" max="2030" class="form-control"
+                       placeholder="Year" value="2000">
+            </div>
+            <div class="mb-3 form-group">
+                <label for="author">Author:</label>
+                <input type="text" name="author" id="author" class="form-control"
+                       placeholder="Peter Armen Faulton" value="Peter Armen Faulton"
+                        disabled>
+            </div>
+            <div class="mb-3 form-group">
+                <label for="sectionHardCover">Hard Cover:</label>
+            </div>
+            <div class="form-check" id="sectionHardCover">
+                <input class="form-check-input" type="radio" name="hardCover" id="hardCover1" checked>
+                <label class="form-check-label" for="hardCover1">Yes</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="hardCover" id="hardCover2">
+                <label class="form-check-label" for="hardCover2">No</label>
+            </div>
+            <div class="mb-3 form-group">
+                <label for="price">Price:</label>
+                <input type="number" name="price" step="0.01" min="0.00" max="1000.00" id="price" class="form-control"
+                       placeholder="Price" value="14.99">
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        <button class="btn btn-lg btn-outline-primary" id="btnAddBook">Add Book</button>
+    </div>
+    <div class="jumbotron" id="output">
+
+    </div>
+</div>
+<script>
+    document.getElementById("btnAddBook").addEventListener("click", (event) =>{
+        let url = "https://spu-f-back-end.herokuapp.com/api/books/"
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                document.getElementById("output").innerHTML =
+                    "<pre>" + this.responseText + "</pre>";
+            }
+        };
+        // foo=bar&lorem=ipsum
+        let bookData;
+        if(document.getElementById("hardCover1").checked) {
+            bookData = "title=" + document.getElementById("title").value + "&" +
+                "description=" + document.getElementById("description").value  + "&" +
+                "year=" + document.getElementById("year").value  + "&" +
+                "author="  + document.getElementById("author").value  + "&" +
+                "hardCover=" + "true"  + "&" +
+                "price="  + document.getElementById("price").value;
+        } else {
+            bookData = "title=" + document.getElementById("title").value + "&" +
+                "description=" + document.getElementById("description").value  + "&" +
+                "year=" + document.getElementById("year").value  + "&" +
+                "author="  + document.getElementById("author").value  + "&" +
+                "hardCover=" + "false"  + "&" +
+                "price="  + document.getElementById("price").value;
+        }
+
+        xhttp.open('POST', url, true);
+        // Just needed to place this line AFTER opening the object
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(bookData);
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>
