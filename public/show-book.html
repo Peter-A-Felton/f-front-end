@@ -101,7 +101,7 @@
                     CreateTable(JSON.parse(this.responseText));
             }
         };
-        let bookData = document.getElementById("id").value;
+        let bookData = "title=" + document.getElementById("id").value;
 
         xhttp.open('GET', url, true);
         // Just needed to place this line AFTER opening the object
