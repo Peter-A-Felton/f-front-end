@@ -31,9 +31,8 @@
     </ul>
 </nav>
 <div class="container">
-    <h1>List of Books</h1>
+    <h1>List of All Books</h1>
     <button class="btn-primary btn-lg" id="btnLoadBooks">Load Books</button>
-    <a href="insert-book.html" class="btn-lg">Add a Book</a>
     <div class="jumbotron" id="output">
 
     </div>
@@ -72,6 +71,18 @@
             '</table>\n'
         return table;
     }
+
+    let url = "https://spu-f-back-end.herokuapp.com/api/books/"
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function (){
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("output").innerHTML =
+                CreateTable(JSON.parse(this.responseText));
+        }
+    };
+    xhttp.open('GET', url, true);
+    xhttp.send();
+    
     document.getElementById("btnLoadBooks").addEventListener("click", (event) =>{
         let url = "https://spu-f-back-end.herokuapp.com/api/books/"
         let xhttp = new XMLHttpRequest();
