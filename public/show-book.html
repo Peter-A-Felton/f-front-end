@@ -39,8 +39,8 @@
 
             <div class="mb-3 form-group">
                 <label for="id">Book ID:</label>
-                <input type="number" step="1" name="id" id="id" min="0" class="form-control"
-                       placeholder="0" value="0">
+                <input type="string" name="id" id="id" class="form-control"
+                       placeholder="60c714b7a05c9300045af6bd" value="60c714b7a05c9300045af6bd">
             </div>
         </form>
     </div>
@@ -101,7 +101,7 @@
                     CreateTable(JSON.parse(this.responseText));
             }
         };
-        let bookData = "id=" + document.getElementById("id").value;
+        let bookData = "_id=" + document.getElementById("id").value;
 
         xhttp.open('GET', url, true);
         // Just needed to place this line AFTER opening the object
