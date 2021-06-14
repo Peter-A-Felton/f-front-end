@@ -99,7 +99,8 @@
 
         xhttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
-                if(this.responseText.indexOf("{\"error\":{") !== -1) {
+                if((this.responseText.indexOf("{\"error\":{") !== -1) ||
+                    (this.responseText.indexOf("[]") !== -1)) {
                     document.getElementById("output").innerHTML =
                         "<p>Could not find this book. Try again!</p>";
                 } else {
