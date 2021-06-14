@@ -52,6 +52,8 @@
     </div>
 </div>
 <script>
+    const req = require("express");
+
     function CreateTable(data){
         let table;
         table =
@@ -96,13 +98,11 @@
         let url = "https://spu-f-back-end.herokuapp.com/api/books/"
         let xhttp = new XMLHttpRequest();
 
+        req.query.id = document.getElementById("id").value;
         let bookData = "?_id=" + document.getElementById("id").value;
         console.log(document.getElementById("id").value);
 
         xhttp.open('GET', url, true);
-        // Just needed to place this line AFTER opening the object
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send(bookData);
 
         xhttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
