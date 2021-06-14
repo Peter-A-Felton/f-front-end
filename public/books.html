@@ -57,7 +57,7 @@
 
         for (let book in data){
             let yesNoStr;
-            if(data[book]["hardCover"] == "true") {
+            if(data[book]["hardCover"] === true) {
                 yesNoStr = "Yes";
             } else {
                 yesNoStr = "No";
