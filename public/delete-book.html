@@ -118,7 +118,7 @@
                         CreateTable(JSON.parse(this.responseText));
                     document.getElementById("btnDeleteBook").addEventListener("click", (event) =>{
                         let url = "https://spu-f-back-end.herokuapp.com/api/books/"
-                            + myID;
+                            + myID + "/";
                         let xhttp = new XMLHttpRequest();
 
                         xhttp.onreadystatechange = function (){
