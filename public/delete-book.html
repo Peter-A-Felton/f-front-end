@@ -98,27 +98,6 @@
             '<div class="container">\n' +
             '    <button class="btn btn-lg btn-outline-primary" id="btnDeleteBook">Delete Book</button>\n' +
             '</div>'
-
-        document.getElementById("btnDeleteBook").addEventListener("click", (event) =>{
-            let url = "https://spu-f-back-end.herokuapp.com/api/books/"
-                + myID;
-            let xhttp = new XMLHttpRequest();
-
-            xhttp.onreadystatechange = function (){
-                if (this.readyState == 4 && this.status == 200){
-                    if(this.responseText.indexOf("{\"deletedId\":") !== -1) {
-                        document.getElementById("output").innerHTML =
-                            "<p>Book successfully deleted.</p>";
-                    } else {
-                        document.getElementById("output").innerHTML =
-                            "<p>Could not delete this book. Try again later!</p>";
-                    }
-                }
-            };
-
-            xhttp.open('DELETE', url, true);
-            xhttp.send();
-        });
         return table;
     }
 
@@ -137,6 +116,26 @@
                     myID = document.getElementById("id").value;
                     document.getElementById("output").innerHTML =
                         CreateTable(JSON.parse(this.responseText));
+                    document.getElementById("btnDeleteBook").addEventListener("click", (event) =>{
+                        let url = "https://spu-f-back-end.herokuapp.com/api/books/"
+                            + myID;
+                        let xhttp = new XMLHttpRequest();
+
+                        xhttp.onreadystatechange = function (){
+                            if (this.readyState == 4 && this.status == 200){
+                                if(this.responseText.indexOf("{\"deletedId\":") !== -1) {
+                                    document.getElementById("output").innerHTML =
+                                        "<p>Book successfully deleted.</p>";
+                                } else {
+                                    document.getElementById("output").innerHTML =
+                                        "<p>Could not delete this book. Try again later!</p>";
+                                }
+                            }
+                        };
+
+                        xhttp.open('DELETE', url, true);
+                        xhttp.send();
+                    });
                 }
             }
             console.log(this.responseText);
