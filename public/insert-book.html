@@ -68,11 +68,11 @@
                 <label for="sectionHardCover">Hard Cover:</label>
             </div>
             <div class="form-check" id="sectionHardCover">
-                <input class="form-check-input" type="radio" name="hardCover" id="hardCover1" value="true" checked>
+                <input class="form-check-input" type="radio" name="hardCover" id="hardCover1" checked>
                 <label class="form-check-label" for="hardCover1">Yes</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="hardCover" id="hardCover2" value="false">
+                <input class="form-check-input" type="radio" name="hardCover" id="hardCover2">
                 <label class="form-check-label" for="hardCover2">No</label>
             </div>
             <div class="mb-3 form-group">
@@ -103,12 +103,23 @@
             }
         };
         // foo=bar&lorem=ipsum
-        let bookData = "title=" + document.getElementById("title").value + "&" +
-            "description=" + document.getElementById("description").value  + "&" +
-            "year=" + document.getElementById("year").value  + "&" +
-            "author="  + document.getElementById("author").value  + "&" +
-            "hardCover=" + document.getElementById("hardCover").value  + "&" +
-            "price="  + document.getElementById("price").value;
+        let bookData;
+        if(document.getElementById("hardCover1").checked) {
+            bookData = "title=" + document.getElementById("title").value + "&" +
+                "description=" + document.getElementById("description").value  + "&" +
+                "year=" + document.getElementById("year").value  + "&" +
+                "author="  + document.getElementById("author").value  + "&" +
+                "hardCover=" + "true"  + "&" +
+                "price="  + document.getElementById("price").value;
+        } else {
+            bookData = "title=" + document.getElementById("title").value + "&" +
+                "description=" + document.getElementById("description").value  + "&" +
+                "year=" + document.getElementById("year").value  + "&" +
+                "author="  + document.getElementById("author").value  + "&" +
+                "hardCover=" + "false"  + "&" +
+                "price="  + document.getElementById("price").value;
+        }
+
         xhttp.open('POST', url, true);
         // Just needed to place this line AFTER opening the object
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
