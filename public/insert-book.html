@@ -90,6 +90,9 @@
             if (this.readyState == 4 && this.status == 200){
                 document.getElementById("output").innerHTML =
                     "<pre>" + this.responseText + "</pre>";
+            } else {
+                document.getElementById("output").innerHTML =
+                    "<p>An error has occured. Please try again!</p>"
             }
         };
         // foo=bar&lorem=ipsum
