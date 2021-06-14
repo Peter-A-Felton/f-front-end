@@ -95,8 +95,8 @@
     document.getElementById("btnFindBook").addEventListener("click", (event) =>{
         let url = "https://spu-f-back-end.herokuapp.com/api/books/"
         let xhttp = new XMLHttpRequest();
-        
-        let bookData = "?_id=" + document.getElementById("id").value;
+
+        let bookData = "" + document.getElementById("id").value;
 
         xhttp.open('GET', url, true);
         // Just needed to place this line AFTER opening the object
