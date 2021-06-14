@@ -32,7 +32,8 @@
 </nav>
 <div class="container">
     <h1>List of All Books</h1>
-    <button class="btn-primary btn-lg" id="btnLoadBooks">Load Books</button>
+    <button class="btn-primary btn-lg" id="btnLoadBooks">Reload Books</button>
+    <br>
     <div class="jumbotron" id="output">
 
     </div>
@@ -82,7 +83,7 @@
     };
     xhttp.open('GET', url, true);
     xhttp.send();
-    
+
     document.getElementById("btnLoadBooks").addEventListener("click", (event) =>{
         let url = "https://spu-f-back-end.herokuapp.com/api/books/"
         let xhttp = new XMLHttpRequest();
